@@ -1,0 +1,51 @@
+Building evaluation database and ingesting corpus...
+Asking 41 golden questions (embedder=local, model=fake)...
+
+======================================================================
+1. SECURITY (must be 100%)
+======================================================================
+41 questions, 180 retrieved passages checked against the independent access rules
+RESULT: PASS, no violations
+
+======================================================================
+2. RETRIEVAL QUALITY (answerable questions; top 5 passages)
+======================================================================
+exact       found in top 5: 100% (17/17) ranked #1: 76% (13/17)  MRR: 0.88
+    ranked #2 E01: How many hours does Brightwater have to deliver after a dispatch notice?
+    ranked #2 E09: Who gets the residuary estate?
+    ranked #2 E12: Who is the piano left to?
+    ranked #2 E15: How many hours does Brightwater have to deliver after a dispatch notice?
+paraphrase  found in top 5: 83% (5/6)    ranked #1: 50% (3/6)    MRR: 0.59
+    missed P01: What is the maximum amount the carrier could owe us for late goods?
+    ranked #3 P02: Can the supplier walk away from the contract, and how?
+    ranked #5 P04: How much money was in the bank?
+
+======================================================================
+3. ANSWER BEHAVIOUR
+======================================================================
+exact       answered: 100% (17/17) answered with a correct citation: 76% (13/17)
+paraphrase  answered: 100% (6/6)   answered with a correct citation: 50% (3/6)
+unanswerable correctly refused: 33% (2/6)
+    WRONGLY ANSWERED N01: Who has been appointed as mediator in the dispute?
+      -> "Counsel's view: the 150,000 GBP cap in clause 14.2 is likely enforceable, but th" [Counsel advice memo, p. 1]
+    WRONGLY ANSWERED N02: What is the carrier's insurance policy number?
+      -> "Counsel's view: the 150,000 GBP cap in clause 14.2 is likely enforceable, but th" [Counsel advice memo, p. 1]
+    WRONGLY ANSWERED N04: Which charity was named in the codicil?
+      -> 'Household contents and the piano are valued at 12,000 GBP in total.' [Estate inventory, p. 2]
+    WRONGLY ANSWERED N06: What are the company's employee pension arrangements?
+      -> "Counsel's view: the 150,000 GBP cap in clause 14.2 is likely enforceable, but th" [Counsel advice memo, p. 1]
+
+======================================================================
+4. CONFIDENCE THRESHOLD SWEEP (best similarity must reach the threshold to answer)
+======================================================================
+threshold |   exact kept | paraphrase kept | unanswerable refused
+     0.05 | 100% (17/17) |      100% (6/6) |             0% (0/6)
+     0.10 | 100% (17/17) |      100% (6/6) |            17% (1/6)
+     0.15 | 100% (17/17) |      100% (6/6) |            17% (1/6)
+     0.20 | 100% (17/17) |      100% (6/6) |            33% (2/6)   <- current setting
+     0.25 |  82% (14/17) |       67% (4/6) |            83% (5/6)
+     0.30 |  71% (12/17) |       50% (3/6) |           100% (6/6)
+     0.35 |   53% (9/17) |        0% (0/6) |           100% (6/6)
+     0.40 |   53% (9/17) |        0% (0/6) |           100% (6/6)
+     0.45 |   35% (6/17) |        0% (0/6) |           100% (6/6)
+     0.50 |   18% (3/17) |        0% (0/6) |           100% (6/6)
